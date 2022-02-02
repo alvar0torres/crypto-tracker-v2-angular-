@@ -1,0 +1,28 @@
+.search_section {
+  color: white;
+  display: grid;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
+
+label {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 16rem;
+  height: 3rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.25rem;
+  background-image: linear-gradient(-1turn,#0f505c,#1a7080 48%, #0fbbda);
+  padding-left: 1rem;
+  color: white;
+}
+
+input::placeholder {
+  color: white;
+  font-family: "ZCOOL QingKe HuangYou", cursive;
+}

@@ -1,0 +1,70 @@
+<section class="table_section">
+  <div class="table_section_content">
+
+    <div *ngIf="isLoading" class="spinner"><app-loading-spinner></app-loading-spinner></div>
+
+    <h3>Click on a row to see the charts</h3>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let coin">
+          <div
+            routerLink="/coin/{{ coin.id }}"
+            routerLinkActive="active"
+            id="name_section"
+          >
+            <img id="image" src="{{ coin.image }}" alt="Coin Logo" /><span
+              id="coin_name"
+              >{{ coin.name }}</span
+            >
+            <span id="coin_symbol">{{ coin.symbol }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let coin">
+          <div routerLink="/coin/{{ coin.id }}" routerLinkActive="active">
+            <span id="coin_price">${{ coin.price.toLocaleString() }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- 24h Column -->
+      <ng-container matColumnDef="24h %">
+        <th mat-header-cell *matHeaderCellDef>24h %</th>
+        <td
+          mat-cell
+          *matCellDef="let coin"
+          [ngClass]="{
+            green: coin.oneDayChange >= 0,
+            red: coin.oneDayChange < 0
+          }"
+        >
+          <div routerLink="/coin/{{ coin.id }}" routerLinkActive="active">
+            <strong>{{ coin.oneDayChange.toFixed(2) }}%</strong>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Market Cap Column -->
+      <ng-container matColumnDef="Market Cap">
+        <th mat-header-cell *matHeaderCellDef>Market Cap</th>
+        <td mat-cell *matCellDef="let coin">
+          <div routerLink="/coin/{{ coin.id }}" routerLinkActive="active">
+            <strong>${{ coin.marketCap.toLocaleString() }}</strong>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>
